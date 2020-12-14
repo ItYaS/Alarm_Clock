@@ -1,4 +1,5 @@
 import shelve
+import sqlite3
 import main_win
 import edit_win
 import week_win
@@ -31,7 +32,7 @@ def clean_data():
     data.close()
 
 
-class MainClass():
+class MainClass:
 
     def open_main_win(self):
         self.mw = main_win.MainWin()
@@ -62,4 +63,40 @@ class MainClass():
         self.ex.close()
 
 
+class DataBases:
+    # создание и запись обязательных строчек для начала работы
+    def create_databases(self):
+        path = ''
+        query = """
+            CREATE TABLE IF NOT EXISTS data (
+              id INTEGER PRIMARY KEY AUTOINCREMENT,
+              year INTEGER,
+              month INTEGER,
+              day INTEGER,
+              hour INTEGER,
+              minutes INTEGER
+            );
+            """
+
+        connection = self.create_connection(path)
+        self.insert_query(connection, query)  # создание БД
+
+    # подключение к БД (обязательно)
+    def create_connection(self, path):
+        return sqlite3.connect(path)
+
+    # записать в БД
+    def insert_query(self, connection, query):
+        cursor = connection.cursor()
+        cursor.execute(query)
+        connection.commit()
+
+    # прочитать из БД
+    def pull_query(self, connection, query):
+        cursor = connection.cursor()
+        cursor.execute(query)
+        return cursor.fetchall()
+
+
 main_class = MainClass()
+databases = DataBases()
