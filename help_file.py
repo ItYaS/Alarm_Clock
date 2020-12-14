@@ -63,10 +63,10 @@ class MainClass:
         self.ex.close()
 
 
-class DataBases:
+class DataBase:
     # создание и запись обязательных строчек для начала работы
-    def create_databases(self):
-        path = ''
+    def create_database(self):
+        path = 'database.sqlite'
         query = """
             CREATE TABLE IF NOT EXISTS data (
               id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -99,4 +99,4 @@ class DataBases:
 
 
 main_class = MainClass()
-databases = DataBases()
+database = DataBase()
