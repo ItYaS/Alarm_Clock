@@ -3,7 +3,7 @@ from PyQt5 import QtWidgets
 import help_file
 
 
-help_file.databases.create_databases()  # подключение БД
+help_file.database.create_database()  # подключение БД
 
 # открытие класса с будильниками
 app = QtWidgets.QApplication([])
