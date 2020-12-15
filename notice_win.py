@@ -10,26 +10,24 @@ class WinOfNotice(QtWidgets.QMainWindow):
         self.ui.setupUi(self)
 
         data = help_file.database.pull_query(help_file.active_path)
-        for elem in data:
-            print(elem)
+        turpl = data[0]
 
-        self.ui.name.setText(data['act_name'])
-        self.ui.date.setText('{}.{}.{}'.format(data['act_day'], data['act_month'], data['act_year']))
-        self.ui.time.setText('время: {}:{}'.format(data['act_hour'], data['act_minutes']))
+        self.ui.name.setText(turpl[1])
+        self.ui.date.setText(turpl[2])
+        self.ui.time.setText('время: {}:{}'.format(turpl[3], turpl[4]))
 
-        self.ui.pushButton.clicked.connect(self.just_close)
+        self.ui.pushButton.clicked.connect(self.close_win)
 
     # функция закрытие окна
-    def just_close(self):
-        data = shelve.open('saves data\\data')
-        path = help_file.active_time
-        data[path + 'name'] = 'название'
-        data[path + 'year'] = 'год'
-        data[path + 'month'] = 'месяц'
-        data[path + 'day'] = 'день'
-        data[path + 'hour'] = 'час'
-        data[path + 'minutes'] = 'минуты'
-        data[path + 'days'] = 'пн вт ср чт пт сб вс'
-        data.close()
+    def close_win(self):
+        query = f"""
+                    UPDATE data SET
+                        name = NULL,
+                        days = NULL,
+                        hour = NULL,
+                        minutes = NULL
+                    WHERE id = {int(help_file.active_id)}
+                """
+        help_file.database.insert_query('day.sqlite', query)
         # вызов исключения для закрытия окна
         raise NameError

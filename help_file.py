@@ -10,7 +10,6 @@ active_path = 'data\\day.sqlite'
 
 
 class MainClass:
-
     def open_main_win(self):
         self.mw = main_win.MainWin()
         self.mw.show()
@@ -48,7 +47,7 @@ class DataBase:
                     CREATE TABLE IF NOT EXISTS data (
                       id INTEGER PRIMARY KEY AUTOINCREMENT,
                       name TEXT,
-                      days TEXT,
+                      days DATE,
                       hour INTEGER,
                       minutes INTEGER
                     );
@@ -100,25 +99,32 @@ main_class = MainClass()
 database = DataBase()
 
 if __name__ == '__main__':
-    # database.create_database()
+    database.create_database()
 
     # изменение данных
-    query = f"""
-                UPDATE data SET
-                    name = 'name'
-                    days = '12.12.12'
-                    hour = 12
-                    minutes = 00
-                WHERE id = 1
-                """
-    database.insert_query('data\\day.sqlite', query)
+    q = """
+            UPDATE data SET
+                name = 'hey!',
+                days = '15.12.2020',
+                hour = 12,
+                minutes = 01
+            WHERE id = 1
+        """
+    database.insert_query('data\\day.sqlite', q)
 
-    days = database.pull_query('data\\day.sqlite', "SELECT * FROM data")
-    for day in days:
-        print(day)
+    print(database.pull_query('data\\day.sqlite', "SELECT * FROM data"))
 
     print('______________________________________')
     # вытаскивание конкретных данных по id
 
     data = database.pull_query(active_path, f"SELECT * FROM data WHERE id={active_id}")
-    print(data)
+    query = f"""
+                UPDATE data SET
+                    name = NULL,
+                    days = NULL,
+                    hour = NULL,
+                    minutes = NULL
+                WHERE id = 1
+            """
+    database.insert_query('day.sqlite', query)
+    print(database.pull_query('data\\day.sqlite', "SELECT * FROM data"))

@@ -40,9 +40,9 @@ class WinOfDays(QtWidgets.QMainWindow):
         # сохранение введенных данных
         query = f"""
                     UPDATE data SET
-                        name = {self.ui.name.text()}
-                        days = {self.ui.day.text()}.{self.ui.month.text()}.{self.ui.year.text()}
-                        hour = {self.ui.hour.text()}
+                        name = {self.ui.name.text()},
+                        days = {self.ui.day.text()}.{self.ui.month.text()}.{self.ui.year.text()},
+                        hour = {self.ui.hour.text()},
                         minutes = {self.ui.minutes.text()}
                     WHERE id = {int(help_file.active_id)}
                 """

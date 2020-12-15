@@ -86,17 +86,15 @@ class MainWin(QtWidgets.QMainWindow):
         help_file.main_class.open_week_win()
 
     # функция изменения значений первого окна в БД на значения по умолчанию
-    def del_data(self, active_data):
+    def del_data(self, active_id):
         # открытие базы данных
-        data = shelve.open('saves data\\data')
-        path = str(active_data)
-        data[path + 'name'] = 'название'
-        data[path + 'year'] = 'год'
-        data[path + 'month'] = 'месяц'
-        data[path + 'day'] = 'день'
-        data[path + 'hour'] = 'час'
-        data[path + 'minutes'] = 'минуты'
-        data[path + 'days'] = 'пн вт ср чт пт сб вс'
-        # закрытие базы данных
-        data.close()
+        query = f"""
+                    UPDATE data SET
+                        name = NULL,
+                        days = NULL,
+                        hour = NULL,
+                        minutes = NULL
+                    WHERE id = {int(active_id)}
+                """
+        help_file.database.insert_query('day.sqlite', query)
         self.edit_label()

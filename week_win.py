@@ -51,9 +51,9 @@ class WinOfWeek(QtWidgets.QMainWindow):
 
         query = f"""
                     UPDATE data SET
-                        name = {self.ui.name.text()}
-                        days = {days}
-                        hour = {self.ui.hour.text()}
+                        name = {self.ui.name.text()},
+                        days = {days},
+                        hour = {self.ui.hour.text()},
                         minutes = {self.ui.minutes.text()}
                     WHERE id = {int(help_file.active_id)}
             """
