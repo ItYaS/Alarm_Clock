@@ -1,4 +1,3 @@
-import shelve
 from PyQt5 import QtWidgets
 from GUI.exit_alarm_tool import Ui_MainWindow
 import help_file
@@ -10,11 +9,12 @@ class WinOfNotice(QtWidgets.QMainWindow):
         self.ui = Ui_MainWindow()
         self.ui.setupUi(self)
 
-        data = shelve.open('saves data\\data')
+        data = help_file.database.pull_query(help_file.active_path)
+        for elem in data:
+            print(elem)
 
         self.ui.name.setText(data['act_name'])
         self.ui.date.setText('{}.{}.{}'.format(data['act_day'], data['act_month'], data['act_year']))
-        self.ui.days.setText('{}'.format(data['act_days']))
         self.ui.time.setText('время: {}:{}'.format(data['act_hour'], data['act_minutes']))
 
         self.ui.pushButton.clicked.connect(self.just_close)

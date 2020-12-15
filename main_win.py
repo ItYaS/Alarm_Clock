@@ -17,27 +17,27 @@ class MainWin(QtWidgets.QMainWindow):
         # вывод значений
         self.edit_label()
 
-        # кнопки добавления будиьника
-        self.ui.edit0_0.clicked.connect(lambda: self.save_and_open_EditWin('day0_'))
-        self.ui.edit0_1.clicked.connect(lambda: self.save_and_open_EditWin('day1_'))
-        self.ui.edit0_2.clicked.connect(lambda: self.save_and_open_EditWin('day2_'))
-        self.ui.edit0_3.clicked.connect(lambda: self.save_and_open_EditWin('day3_'))
+        # кнопки добавления будильника
+        self.ui.edit0_0.clicked.connect(lambda: self.open_day_win('1'))
+        self.ui.edit0_1.clicked.connect(lambda: self.open_day_win('2'))
+        self.ui.edit0_2.clicked.connect(lambda: self.open_day_win('3'))
+        self.ui.edit0_3.clicked.connect(lambda: self.open_day_win('4'))
 
-        self.ui.edit1_0.clicked.connect(lambda: self.save_and_open_WinOfWeek('week0_'))
-        self.ui.edit1_1.clicked.connect(lambda: self.save_and_open_WinOfWeek('week1_'))
-        self.ui.edit1_2.clicked.connect(lambda: self.save_and_open_WinOfWeek('week2_'))
-        self.ui.edit1_3.clicked.connect(lambda: self.save_and_open_WinOfWeek('week3_'))
+        self.ui.edit1_0.clicked.connect(lambda: self.open_week_win('1'))
+        self.ui.edit1_1.clicked.connect(lambda: self.open_week_win('2'))
+        self.ui.edit1_2.clicked.connect(lambda: self.open_week_win('3'))
+        self.ui.edit1_3.clicked.connect(lambda: self.open_week_win('4'))
 
         # кнопки удаления будильников
-        self.ui.delete0_0.clicked.connect(lambda: self.del_data('day0_'))
-        self.ui.delete0_1.clicked.connect(lambda: self.del_data('day1_'))
-        self.ui.delete0_2.clicked.connect(lambda: self.del_data('day2_'))
-        self.ui.delete0_3.clicked.connect(lambda: self.del_data('day3_'))
+        self.ui.delete0_0.clicked.connect(lambda: self.del_data('1'))
+        self.ui.delete0_1.clicked.connect(lambda: self.del_data('2'))
+        self.ui.delete0_2.clicked.connect(lambda: self.del_data('3'))
+        self.ui.delete0_3.clicked.connect(lambda: self.del_data('4'))
 
-        self.ui.delete1_0.clicked.connect(lambda: self.del_data('week0_'))
-        self.ui.delete1_1.clicked.connect(lambda: self.del_data('week1_'))
-        self.ui.delete1_2.clicked.connect(lambda: self.del_data('week2_'))
-        self.ui.delete1_3.clicked.connect(lambda: self.del_data('week3_'))
+        self.ui.delete1_0.clicked.connect(lambda: self.del_data('1'))
+        self.ui.delete1_1.clicked.connect(lambda: self.del_data('2'))
+        self.ui.delete1_2.clicked.connect(lambda: self.del_data('3'))
+        self.ui.delete1_3.clicked.connect(lambda: self.del_data('4'))
 
     # функция вывода значений
     def edit_label(self):
@@ -72,14 +72,14 @@ class MainWin(QtWidgets.QMainWindow):
         data.close()
 
     # функция открытия окна редактирования
-    def save_and_open_EditWin(self, active_data):
+    def open_day_win(self, active_data):
         # использование аргумента для определения пути
         help_file.active_time = active_data
         # открытие окна с редактированием будильника
         help_file.main_class.open_edit_win()
 
     # функция открытия окна с неделями
-    def save_and_open_WinOfWeek(self, active_data):
+    def open_week_win(self, active_data):
         # использование аргумента для определения пути
         help_file.active_time = active_data
         # открытие окна с редактированием будильника

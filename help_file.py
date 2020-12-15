@@ -1,35 +1,12 @@
-import shelve
 import sqlite3
 import main_win
-import edit_win
+import day_win
 import week_win
 import notice_win
 
-list_of_days = list()
 
-active_time = ''
-
-
-# функция, которая ставит на все значение по умолчанию
-def clean_data():
-    data = shelve.open('saves data\\data')
-    for name in ('day0_', 'day1_', 'day2_', 'day3_'):
-        data[name + 'name'] = 'название'
-        data[name + 'year'] = 'год'
-        data[name + 'month'] = 'месяц'
-        data[name + 'day'] = 'день'
-        data[name + 'hour'] = 'час'
-        data[name + 'minutes'] = 'минуты'
-    data.close()
-
-    data = shelve.open('saves data\\data')
-    for name in ('week0_', 'week1_', 'week2_', 'week3_'):
-        data[name + 'name'] = 'название'
-        data[name + 'hour'] = 'час'
-        data[name + 'minutes'] = 'минуты'
-        data[name + 'days'] = 'пн вт ср чт пт сб вс'
-        data[name + 'list'] = []
-    data.close()
+active_id = 1
+active_path = 'data\\day.sqlite'
 
 
 class MainClass:
@@ -39,7 +16,7 @@ class MainClass:
         self.mw.show()
 
     def open_edit_win(self):
-        self.ew = edit_win.WinOfDays()
+        self.ew = day_win.WinOfDays()
         self.ew.show()
 
     def open_week_win(self):
@@ -64,35 +41,56 @@ class MainClass:
 
 
 class DataBase:
-    # создание и запись обязательных строчек для начала работы
+    # создание БД
     def create_database(self):
-        path = 'database.sqlite'
+        # создание таблицы
+        table = """
+                    CREATE TABLE IF NOT EXISTS data (
+                      id INTEGER PRIMARY KEY AUTOINCREMENT,
+                      name TEXT,
+                      days TEXT,
+                      hour INTEGER,
+                      minutes INTEGER
+                    );
+                    """
+
+        self.insert_query('data\\day.sqlite', table)
+        self.insert_query('data\\week.sqlite', table)
+
+        # добавление данных по умолчанию
         query = """
-            CREATE TABLE IF NOT EXISTS data (
-              id INTEGER PRIMARY KEY AUTOINCREMENT,
-              year INTEGER,
-              month INTEGER,
-              day INTEGER,
-              hour INTEGER,
-              minutes INTEGER
-            );
-            """
+                    INSERT INTO
+                      data (name, days, hour, minutes)
+                    VALUES
+                      (NULL, NULL, NULL, NULL);
+                    """
 
-        connection = self.create_connection(path)
-        self.insert_query(connection, query)  # создание БД
+        database.insert_query('data\\day.sqlite', query)
+        database.insert_query('data\\day.sqlite', query)
+        database.insert_query('data\\day.sqlite', query)
+        database.insert_query('data\\day.sqlite', query)
+        # потому что только по одной операции можно делать
+        database.insert_query('data\\week.sqlite', query)
+        database.insert_query('data\\week.sqlite', query)
+        database.insert_query('data\\week.sqlite', query)
+        database.insert_query('data\\week.sqlite', query)
 
-    # подключение к БД (обязательно)
+    # подключение к БД
     def create_connection(self, path):
         return sqlite3.connect(path)
 
-    # записать в БД
-    def insert_query(self, connection, query):
+    # добавление данных или изменение
+    def insert_query(self, path, query):
+        connection = self.create_connection(path)
+
         cursor = connection.cursor()
         cursor.execute(query)
         connection.commit()
 
-    # прочитать из БД
-    def pull_query(self, connection, query):
+    # чтение данных
+    def pull_query(self, path, query):
+        connection = self.create_connection(path)
+
         cursor = connection.cursor()
         cursor.execute(query)
         return cursor.fetchall()
@@ -100,3 +98,27 @@ class DataBase:
 
 main_class = MainClass()
 database = DataBase()
+
+if __name__ == '__main__':
+    # database.create_database()
+
+    # изменение данных
+    query = f"""
+                UPDATE data SET
+                    name = 'name'
+                    days = '12.12.12'
+                    hour = 12
+                    minutes = 00
+                WHERE id = 1
+                """
+    database.insert_query('data\\day.sqlite', query)
+
+    days = database.pull_query('data\\day.sqlite', "SELECT * FROM data")
+    for day in days:
+        print(day)
+
+    print('______________________________________')
+    # вытаскивание конкретных данных по id
+
+    data = database.pull_query(active_path, f"SELECT * FROM data WHERE id={active_id}")
+    print(data)
