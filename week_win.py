@@ -6,7 +6,6 @@ import main_win
 
 
 class WinOfWeek(QtWidgets.QMainWindow):
-    # конструктор
     def __init__(self):
         super(WinOfWeek, self).__init__()
         self.ui = Ui_MainWindow()
@@ -29,9 +28,7 @@ class WinOfWeek(QtWidgets.QMainWindow):
 
         self.ui.button_of_save.clicked.connect(self.save_and_close)
 
-    # функция сохранения и открытие нового окна
     def save_and_close(self):
-        # сохранение введенных данных
         days = ''
 
         if self.ui.monday.isChecked():
@@ -49,17 +46,19 @@ class WinOfWeek(QtWidgets.QMainWindow):
         if self.ui.sunday.isChecked():
             days += 'вс'
 
+        clear_days = days.strip()  # убирание пробелов в конце строки на случай если последний день не воскресенье
+
         query = f"""
                     UPDATE data SET
-                        name = {self.ui.name.text()},
-                        days = {days},
-                        hour = {self.ui.hour.text()},
-                        minutes = {self.ui.minutes.text()}
-                    WHERE id = {int(help_file.active_id)}
-            """
-        help_file.database.insert_query('week.sqlite', query)
+                        name = '{self.ui.name.text()}',
+                        days = '{clear_days}',
+                        hour = '{self.ui.hour.text()}',
+                        minutes = '{self.ui.minutes.text()}'
+                    WHERE id = {help_file.active_id}
+                """
+        help_file.database.update_data('data\\week.sqlite', query)
 
-        # закрытие и открытие окон
+        # закрытие окон и открытие обновленного main_win
         help_file.main_class.close_main_win()
         importlib.reload(main_win)
         help_file.main_class.open_main_win()

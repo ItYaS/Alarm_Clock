@@ -6,7 +6,6 @@ import main_win
 
 
 class WinOfDays(QtWidgets.QMainWindow):
-    # конструктор
     def __init__(self):
         super(WinOfDays, self).__init__()
         self.ui = Ui_MainWindow()
@@ -35,21 +34,19 @@ class WinOfDays(QtWidgets.QMainWindow):
 
         self.ui.button_of_save.clicked.connect(self.save_and_close)
 
-    # функция сохранения и открытия нового окна
     def save_and_close(self):
-        # сохранение введенных данных
         query = f"""
-                    UPDATE data SET
-                        name = {self.ui.name.text()},
-                        days = {self.ui.day.text()}.{self.ui.month.text()}.{self.ui.year.text()},
-                        hour = {self.ui.hour.text()},
-                        minutes = {self.ui.minutes.text()}
-                    WHERE id = {int(help_file.active_id)}
+                    UPDATE data SET 
+                         name = '{self.ui.name.text()}',
+                         days = '{self.ui.day.text()}.{self.ui.month.text()}.{self.ui.year.text()}',
+                         hour = '{self.ui.hour.text()}',
+                         minutes = '{self.ui.minutes.text()}'
+                    WHERE id = {help_file.active_id}
                 """
-        help_file.database.insert_query('day.sqlite', query)
+        help_file.database.update_data('data\\day.sqlite', query)
 
-        # открытие и закрытие окон
+        # закрытие окон и открытие обновленного main_win
         help_file.main_class.close_main_win()
         importlib.reload(main_win)
         help_file.main_class.open_main_win()
-        help_file.main_class.close_edit_win()
+        help_file.main_class.close_day_win()

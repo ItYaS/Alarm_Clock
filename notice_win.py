@@ -9,12 +9,12 @@ class WinOfNotice(QtWidgets.QMainWindow):
         self.ui = Ui_MainWindow()
         self.ui.setupUi(self)
 
-        data = help_file.database.pull_query(help_file.active_path)
-        turpl = data[0]
+        table_data = help_file.database.pull_data(help_file.active_path)
+        active_data = table_data[0]
 
-        self.ui.name.setText(turpl[1])
-        self.ui.date.setText(turpl[2])
-        self.ui.time.setText('время: {}:{}'.format(turpl[3], turpl[4]))
+        self.ui.name.setText(active_data[1])
+        self.ui.date.setText(active_data[2])
+        self.ui.time.setText('время: {}:{}'.format(active_data[3], active_data[4]))
 
         self.ui.pushButton.clicked.connect(self.close_win)
 
@@ -28,6 +28,6 @@ class WinOfNotice(QtWidgets.QMainWindow):
                         minutes = NULL
                     WHERE id = {int(help_file.active_id)}
                 """
-        help_file.database.insert_query('day.sqlite', query)
-        # вызов исключения для закрытия окна
-        raise NameError
+        help_file.database.update_data(help_file.active_path, query)
+
+        raise NameError  # вызов исключения для закрытия окна

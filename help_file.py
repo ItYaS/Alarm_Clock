@@ -5,89 +5,94 @@ import week_win
 import notice_win
 
 
-active_id = 1
-active_path = 'data\\day.sqlite'
+active_id = None  # id данных, которые нужно изменить в другом окне
+active_path = ''  # путь БД с которой надо работать в других окнах
 
 
 class MainClass:
-    def open_main_win(self):
-        self.mw = main_win.MainWin()
-        self.mw.show()
+    MainWin = main_win.MainWin()
+    DayWin = day_win.WinOfDays()
+    WeekWin = week_win.WinOfWeek()
+    NoticeWin = notice_win.WinOfNotice()
 
-    def open_edit_win(self):
-        self.ew = day_win.WinOfDays()
-        self.ew.show()
+    def open_main_win(self):
+        self.MainWin.show()
+
+    def open_day_win(self):
+        self.DayWin.show()
 
     def open_week_win(self):
-        self.ww = week_win.WinOfWeek()
-        self.ww.show()
+        self.WeekWin.show()
 
     def open_notice_win(self):
-        self.ex = notice_win.WinOfNotice()
-        self.ex.show()
+        self.NoticeWin.show()
 
     def close_main_win(self):
-        self.mw.close()
+        self.MainWin.close()
 
-    def close_edit_win(self):
-        self.ew.close()
+    def close_day_win(self):
+        self.DayWin.close()
 
     def close_week_win(self):
-        self.ww.close()
+        self.WeekWin.close()
 
     def close_notice_win(self):
-        self.ex.close()
+        self.NoticeWin.close()
 
 
 class DataBase:
-    # создание БД
+    # удаление и обновление БД
     def create_database(self):
-        # создание таблицы
+        # удаление всех данных и таблиц
+        del_query = 'DROP TABLE data'
+
+        self.update_data('data\\day.sqlite', del_query)
+        self.update_data('data\\week.sqlite', del_query)
+
+        # создание таблиц
         table = """
                     CREATE TABLE IF NOT EXISTS data (
-                      id INTEGER PRIMARY KEY AUTOINCREMENT,
-                      name TEXT,
-                      days DATE,
-                      hour INTEGER,
-                      minutes INTEGER
+                        id INTEGER PRIMARY KEY AUTOINCREMENT,
+                        name TEXT,
+                        days DATE,
+                        hour TEXT,
+                        minutes TEXT
                     );
-                    """
+                """
 
-        self.insert_query('data\\day.sqlite', table)
-        self.insert_query('data\\week.sqlite', table)
+        self.update_data('data\\day.sqlite', table)
+        self.update_data('data\\week.sqlite', table)
 
         # добавление данных по умолчанию
         query = """
                     INSERT INTO
-                      data (name, days, hour, minutes)
+                        data (name, days, hour, minutes)
                     VALUES
-                      (NULL, NULL, NULL, NULL);
-                    """
+                        ('undefined', 'undefined', 'undefined', 'undefined');
+                """
 
-        database.insert_query('data\\day.sqlite', query)
-        database.insert_query('data\\day.sqlite', query)
-        database.insert_query('data\\day.sqlite', query)
-        database.insert_query('data\\day.sqlite', query)
-        # потому что только по одной операции можно делать
-        database.insert_query('data\\week.sqlite', query)
-        database.insert_query('data\\week.sqlite', query)
-        database.insert_query('data\\week.sqlite', query)
-        database.insert_query('data\\week.sqlite', query)
+        database.update_data('data\\day.sqlite', query)
+        database.update_data('data\\day.sqlite', query)
+        database.update_data('data\\day.sqlite', query)
+        database.update_data('data\\day.sqlite', query)
+        # потому что только одну операцию можно делать за один раз
+        database.update_data('data\\week.sqlite', query)
+        database.update_data('data\\week.sqlite', query)
+        database.update_data('data\\week.sqlite', query)
+        database.update_data('data\\week.sqlite', query)
 
-    # подключение к БД
     def create_connection(self, path):
         return sqlite3.connect(path)
 
-    # добавление данных или изменение
-    def insert_query(self, path, query):
+    def update_data(self, path, query):
         connection = self.create_connection(path)
 
         cursor = connection.cursor()
         cursor.execute(query)
         connection.commit()
 
-    # чтение данных
-    def pull_query(self, path, query):
+    def pull_data(self, path):
+        query = 'SELECT * from data'
         connection = self.create_connection(path)
 
         cursor = connection.cursor()
@@ -101,30 +106,8 @@ database = DataBase()
 if __name__ == '__main__':
     database.create_database()
 
-    # изменение данных
-    q = """
-            UPDATE data SET
-                name = 'hey!',
-                days = '15.12.2020',
-                hour = 12,
-                minutes = 01
-            WHERE id = 1
-        """
-    database.insert_query('data\\day.sqlite', q)
+    day_data = database.pull_data('data\\day.sqlite')
+    week_data = database.pull_data('data\\week.sqlite')
 
-    print(database.pull_query('data\\day.sqlite', "SELECT * FROM data"))
-
-    print('______________________________________')
-    # вытаскивание конкретных данных по id
-
-    data = database.pull_query(active_path, f"SELECT * FROM data WHERE id={active_id}")
-    query = f"""
-                UPDATE data SET
-                    name = NULL,
-                    days = NULL,
-                    hour = NULL,
-                    minutes = NULL
-                WHERE id = 1
-            """
-    database.insert_query('day.sqlite', query)
-    print(database.pull_query('data\\day.sqlite', "SELECT * FROM data"))
+    print(day_data)
+    print(week_data)

@@ -1,11 +1,9 @@
-import shelve
 from PyQt5 import QtWidgets, QtGui
 from GUI.main_window import Ui_MainWindow
 import help_file
 
 
 class MainWin(QtWidgets.QMainWindow):
-    # конструктор
     def __init__(self):
         super(MainWin, self).__init__()
         self.ui = Ui_MainWindow()
@@ -14,10 +12,10 @@ class MainWin(QtWidgets.QMainWindow):
         self.setWindowTitle('Main window')
         self.setWindowIcon(QtGui.QIcon('more\\image.jpg'))
 
-        # вывод значений
-        self.edit_label()
+        self.update_screen()  # вывод значений
 
-        # кнопки добавления будильника
+        # lambda для того чтобы функциям можно было передавать аргументы
+
         self.ui.edit0_0.clicked.connect(lambda: self.open_day_win('1'))
         self.ui.edit0_1.clicked.connect(lambda: self.open_day_win('2'))
         self.ui.edit0_2.clicked.connect(lambda: self.open_day_win('3'))
@@ -28,73 +26,67 @@ class MainWin(QtWidgets.QMainWindow):
         self.ui.edit1_2.clicked.connect(lambda: self.open_week_win('3'))
         self.ui.edit1_3.clicked.connect(lambda: self.open_week_win('4'))
 
-        # кнопки удаления будильников
-        self.ui.delete0_0.clicked.connect(lambda: self.del_data('1'))
-        self.ui.delete0_1.clicked.connect(lambda: self.del_data('2'))
-        self.ui.delete0_2.clicked.connect(lambda: self.del_data('3'))
-        self.ui.delete0_3.clicked.connect(lambda: self.del_data('4'))
+        day_path = 'data\\day.sqlite'
+        self.ui.delete0_0.clicked.connect(lambda: self.delete_data(day_path, '1'))
+        self.ui.delete0_1.clicked.connect(lambda: self.delete_data(day_path, '2'))
+        self.ui.delete0_2.clicked.connect(lambda: self.delete_data(day_path, '3'))
+        self.ui.delete0_3.clicked.connect(lambda: self.delete_data(day_path, '4'))
 
-        self.ui.delete1_0.clicked.connect(lambda: self.del_data('1'))
-        self.ui.delete1_1.clicked.connect(lambda: self.del_data('2'))
-        self.ui.delete1_2.clicked.connect(lambda: self.del_data('3'))
-        self.ui.delete1_3.clicked.connect(lambda: self.del_data('4'))
+        week_path = 'data\\week.sqlite'
+        self.ui.delete1_0.clicked.connect(lambda: self.delete_data(week_path, '1'))
+        self.ui.delete1_1.clicked.connect(lambda: self.delete_data(week_path, '2'))
+        self.ui.delete1_2.clicked.connect(lambda: self.delete_data(week_path, '3'))
+        self.ui.delete1_3.clicked.connect(lambda: self.delete_data(week_path, '4'))
 
-    # функция вывода значений
-    def edit_label(self):
-        data = shelve.open('saves data\\data')
+    def update_screen(self):
+        day_data = help_file.database.pull_data('data\\day.sqlite')
+        week_data = help_file.database.pull_data('data\\week.sqlite')
 
-        self.ui.name0_0.setText(data['day0_name'])
-        self.ui.date0_0.setText('{}.{}.{}'.format(data['day0_day'], data['day0_month'], data['day0_year']))
-        self.ui.time0_0.setText('{}:{}'.format(data['day0_hour'], data['day0_minutes']))
-        self.ui.name0_1.setText(data['day1_name'])
-        self.ui.date0_1.setText('{}.{}.{}'.format(data['day1_day'], data['day1_month'], data['day1_year']))
-        self.ui.time0_1.setText('{}:{}'.format(data['day1_hour'], data['day1_minutes']))
-        self.ui.name0_2.setText(data['day2_name'])
-        self.ui.date0_2.setText('{}.{}.{}'.format(data['day2_day'], data['day2_month'], data['day2_year']))
-        self.ui.time0_2.setText('{}:{}'.format(data['day2_hour'], data['day2_minutes']))
-        self.ui.name0_3.setText(data['day3_name'])
-        self.ui.date0_3.setText('{}.{}.{}'.format(data['day3_day'], data['day3_month'], data['day3_year']))
-        self.ui.time0_3.setText('{}:{}'.format(data['day3_hour'], data['day3_minutes']))
+        self.ui.name0_0.setText(day_data[0][1])
+        self.ui.date0_0.setText(day_data[0][2])
+        self.ui.time0_0.setText('{}:{}'.format(day_data[0][3], day_data[0][4]))
+        self.ui.name0_1.setText(day_data[1][1])
+        self.ui.date0_1.setText(day_data[1][2])
+        self.ui.time0_1.setText('{}:{}'.format(day_data[1][3], day_data[1][4]))
+        self.ui.name0_2.setText(day_data[2][1])
+        self.ui.date0_2.setText(day_data[2][2])
+        self.ui.time0_2.setText('{}:{}'.format(day_data[2][3], day_data[2][4]))
+        self.ui.name0_3.setText(day_data[3][1])
+        self.ui.date0_3.setText(day_data[3][2])
+        self.ui.time0_3.setText('{}:{}'.format(day_data[3][3], day_data[3][4]))
 
-        self.ui.name1_0.setText(data['week0_name'])
-        self.ui.date1_0.setText(data['week0_days'])
-        self.ui.time1_0.setText('{}:{}'.format(data['week0_hour'], data['week0_minutes']))
-        self.ui.name1_1.setText(data['week1_name'])
-        self.ui.date1_1.setText(data['week1_days'])
-        self.ui.time1_1.setText('{}:{}'.format(data['week1_hour'], data['week1_minutes']))
-        self.ui.name1_2.setText(data['week2_name'])
-        self.ui.date1_2.setText(data['week2_days'])
-        self.ui.time1_2.setText('{}:{}'.format(data['week2_hour'], data['week2_minutes']))
-        self.ui.name1_3.setText(data['week3_name'])
-        self.ui.date1_3.setText(data['week3_days'])
-        self.ui.time1_3.setText('{}:{}'.format(data['week3_hour'], data['week3_minutes']))
+        self.ui.name1_0.setText(week_data[0][1])
+        self.ui.date1_0.setText(week_data[0][2])
+        self.ui.time1_0.setText('{}:{}'.format(week_data[0][3], week_data[0][4]))
+        self.ui.name1_1.setText(week_data[1][1])
+        self.ui.date1_1.setText(week_data[1][2])
+        self.ui.time1_1.setText('{}:{}'.format(week_data[1][3], week_data[1][4]))
+        self.ui.name1_2.setText(week_data[2][1])
+        self.ui.date1_2.setText(week_data[2][2])
+        self.ui.time1_2.setText('{}:{}'.format(week_data[2][3], week_data[2][4]))
+        self.ui.name1_3.setText(week_data[3][1])
+        self.ui.date1_3.setText(week_data[3][2])
+        self.ui.time1_3.setText('{}:{}'.format(week_data[3][3], week_data[3][4]))
 
-        data.close()
-
-    # функция открытия окна редактирования
     def open_day_win(self, active_data):
         # использование аргумента для определения пути
-        help_file.active_time = active_data
-        # открытие окна с редактированием будильника
-        help_file.main_class.open_edit_win()
+        help_file.active_id = active_data
+        help_file.main_class.open_day_win()
 
-    # функция открытия окна с неделями
-    def open_week_win(self, active_data):
-        # использование аргумента для определения пути
-        help_file.active_time = active_data
-        # открытие окна с редактированием будильника
+    def open_week_win(self, active_id):
+        # использование аргумента для определения id данных в БД
+        help_file.active_id = active_id
         help_file.main_class.open_week_win()
 
-    # функция изменения значений первого окна в БД на значения по умолчанию
-    def del_data(self, active_id):
-        # открытие базы данных
+    def delete_data(self, path, active_id):
         query = f"""
                     UPDATE data SET
-                        name = NULL,
-                        days = NULL,
-                        hour = NULL,
-                        minutes = NULL
-                    WHERE id = {int(active_id)}
+                        name = 'undefined',
+                        days = 'undefined',
+                        hour = 'undefined',
+                        minutes = 'undefined'
+                    WHERE id = {active_id}
                 """
-        help_file.database.insert_query('day.sqlite', query)
-        self.edit_label()
+        help_file.database.update_data(path, query)
+
+        self.update_screen()
