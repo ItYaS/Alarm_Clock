@@ -1,6 +1,6 @@
 import importlib
 from PyQt5 import QtWidgets, QtGui, QtCore
-from GUI.edit_window import Ui_MainWindow
+from GUI.day_window import Ui_MainWindow
 import help_file
 import main_win
 

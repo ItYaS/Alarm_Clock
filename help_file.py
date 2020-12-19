@@ -10,21 +10,20 @@ active_path = ''  # путь БД с которой надо работать в
 
 
 class MainClass:
-    MainWin = main_win.MainWin()
-    DayWin = day_win.WinOfDays()
-    WeekWin = week_win.WinOfWeek()
-    NoticeWin = notice_win.WinOfNotice()
-
     def open_main_win(self):
+        self.MainWin = main_win.MainWin()
         self.MainWin.show()
 
     def open_day_win(self):
+        self.DayWin = day_win.WinOfDays()
         self.DayWin.show()
 
     def open_week_win(self):
+        self.WeekWin = week_win.WinOfWeek()
         self.WeekWin.show()
 
     def open_notice_win(self):
+        self.NoticeWin = notice_win.WinOfNotice()
         self.NoticeWin.show()
 
     def close_main_win(self):
