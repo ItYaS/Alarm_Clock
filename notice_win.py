@@ -13,8 +13,8 @@ class WinOfNotice(QtWidgets.QMainWindow):
         active_data = table_data[help_file.active_id]
 
         self.ui.name.setText(active_data[1])
-        self.ui.date.setText(f'дата: {active_data[2]}')
-        self.ui.time.setText(f'время: {active_data[3]}:{active_data[3]}')
+        self.ui.date.setText(f'date: {active_data[2]}')
+        self.ui.time.setText(f'time: {active_data[3]}:{active_data[4]}')
 
         self.ui.pushButton.clicked.connect(self.close_win)
 
@@ -26,7 +26,7 @@ class WinOfNotice(QtWidgets.QMainWindow):
                         days = 'undefined',
                         hour = 'undefined',
                         minutes = 'undefined'
-                    WHERE id = {int(help_file.active_id)}
+                    WHERE id = {help_file.active_id}
                 """
         help_file.database.update_data(help_file.active_path, query)
 
