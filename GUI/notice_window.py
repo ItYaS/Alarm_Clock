@@ -42,8 +42,8 @@ class Ui_MainWindow(object):
 
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
-        MainWindow.setWindowTitle(_translate("MainWindow", "MainWindow"))
-        self.pushButton.setText(_translate("MainWindow", "отключить"))
-        self.name.setText(_translate("MainWindow", "название"))
-        self.date.setText(_translate("MainWindow", "дата: "))
-        self.time.setText(_translate("MainWindow", "время:"))
+        MainWindow.setWindowTitle(_translate("MainWindow", "Notice about call"))
+        self.pushButton.setText(_translate("MainWindow", "deactivate"))
+        self.name.setText(_translate("MainWindow", ""))
+        self.date.setText(_translate("MainWindow", ""))
+        self.time.setText(_translate("MainWindow", ""))
