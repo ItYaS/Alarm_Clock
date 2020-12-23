@@ -9,9 +9,6 @@ class MainWin(QtWidgets.QMainWindow):
         self.ui = Ui_MainWindow()
         self.ui.setupUi(self)
 
-        self.setWindowTitle('Main window')
-        self.setWindowIcon(QtGui.QIcon('more\\image.jpg'))
-
         self.update_screen()  # вывод значений
 
         # lambda для того чтобы функциям можно было передавать аргументы
