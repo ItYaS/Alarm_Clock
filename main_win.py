@@ -13,15 +13,15 @@ class MainWin(QtWidgets.QMainWindow):
 
         # lambda для того чтобы функциям можно было передавать аргументы
 
-        self.ui.edit0_0.clicked.connect(lambda: self.open_day_win('1'))
-        self.ui.edit0_1.clicked.connect(lambda: self.open_day_win('2'))
-        self.ui.edit0_2.clicked.connect(lambda: self.open_day_win('3'))
-        self.ui.edit0_3.clicked.connect(lambda: self.open_day_win('4'))
+        self.ui.add0_0.clicked.connect(lambda: self.open_day_win('1'))
+        self.ui.add0_1.clicked.connect(lambda: self.open_day_win('2'))
+        self.ui.add0_2.clicked.connect(lambda: self.open_day_win('3'))
+        self.ui.add0_3.clicked.connect(lambda: self.open_day_win('4'))
 
-        self.ui.edit1_0.clicked.connect(lambda: self.open_week_win('1'))
-        self.ui.edit1_1.clicked.connect(lambda: self.open_week_win('2'))
-        self.ui.edit1_2.clicked.connect(lambda: self.open_week_win('3'))
-        self.ui.edit1_3.clicked.connect(lambda: self.open_week_win('4'))
+        self.ui.add1_0.clicked.connect(lambda: self.open_week_win('1'))
+        self.ui.add1_1.clicked.connect(lambda: self.open_week_win('2'))
+        self.ui.add1_2.clicked.connect(lambda: self.open_week_win('3'))
+        self.ui.add1_3.clicked.connect(lambda: self.open_week_win('4'))
 
         day_path = 'data\\day.sqlite'
         self.ui.delete0_0.clicked.connect(lambda: self.delete_data(day_path, '1'))

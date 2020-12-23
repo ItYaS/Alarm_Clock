@@ -11,14 +11,7 @@ class WinOfDays(QtWidgets.QMainWindow):
         self.ui = Ui_MainWindow()
         self.ui.setupUi(self)
 
-        self.ui.name.setMaxLength(100)
-        self.ui.year.setMaxLength(4)
-        self.ui.month.setMaxLength(2)
-        self.ui.day.setMaxLength(2)
-        self.ui.hour.setMaxLength(2)
-        self.ui.minutes.setMaxLength(2)
-
-        self.ui.button_of_save.clicked.connect(self.save_and_close)
+        self.ui.save_button.clicked.connect(self.save_and_close)
 
     def save_and_close(self):
         query = f"""

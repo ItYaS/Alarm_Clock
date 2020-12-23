@@ -16,7 +16,7 @@ class WinOfNotice(QtWidgets.QMainWindow):
         self.ui.date.setText(f'date: {active_data[2]}')
         self.ui.time.setText(f'time: {active_data[3]}:{active_data[4]}')
 
-        self.ui.pushButton.clicked.connect(self.close_win)
+        self.ui.deactivate_button.clicked.connect(self.close_win)
 
     # функция закрытие окна
     def close_win(self):
