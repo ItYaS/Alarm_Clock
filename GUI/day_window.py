@@ -1,12 +1,3 @@
-# -*- coding: utf-8 -*-
-
-# Form implementation generated from reading ui file 'edit_window.ui'
-#
-# Created by: PyQt5 UI code generator 5.13.2
-#
-# WARNING! All changes made in this file will be lost!
-
-
 from PyQt5 import QtCore, QtGui, QtWidgets
 
 
@@ -18,6 +9,8 @@ class Ui_MainWindow(object):
         self.centralwidget.setObjectName("centralwidget")
         self.label = QtWidgets.QLabel(self.centralwidget)
         self.label.setGeometry(QtCore.QRect(30, 10, 81, 16))
+        self.label.setFont(QtGui.QFont('SansSerif', 13))
+        self.label.setGeometry(QtCore.QRect(10, 10, 200, 25))
         self.label.setObjectName("label")
         self.name_label = QtWidgets.QLabel(self.centralwidget)
         self.name_label.setGeometry(QtCore.QRect(100, 60, 221, 16))
@@ -72,12 +65,13 @@ class Ui_MainWindow(object):
 
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
-        MainWindow.setWindowTitle(_translate("MainWindow", "MainWindow"))
-        self.label.setText(_translate("MainWindow", "TextLabel"))
-        self.name_label.setText(_translate("MainWindow", "название"))
-        self.year_label.setText(_translate("MainWindow", "год"))
-        self.month_label.setText(_translate("MainWindow", "месяц"))
-        self.day_label.setText(_translate("MainWindow", "день"))
-        self.hour_label.setText(_translate("MainWindow", "час"))
-        self.button_of_save.setText(_translate("MainWindow", "сохранить"))
-        self.minutes_label.setText(_translate("MainWindow", "минуты"))
+        MainWindow.setWindowTitle(_translate("MainWindow", "Window for one-time call"))
+        MainWindow.setWindowIcon(QtGui.QIcon('more\\image.jpg'))
+        self.label.setText(_translate("MainWindow", "Enter characteristics"))
+        self.name_label.setText(_translate("MainWindow", "name call"))
+        self.year_label.setText(_translate("MainWindow", "year"))
+        self.month_label.setText(_translate("MainWindow", "month"))
+        self.day_label.setText(_translate("MainWindow", "day"))
+        self.hour_label.setText(_translate("MainWindow", "hour"))
+        self.button_of_save.setText(_translate("MainWindow", "save"))
+        self.minutes_label.setText(_translate("MainWindow", "minutes"))
