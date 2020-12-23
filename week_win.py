@@ -11,20 +11,9 @@ class WinOfWeek(QtWidgets.QMainWindow):
         self.ui = Ui_MainWindow()
         self.ui.setupUi(self)
 
-        self.setWindowTitle('Window for weekly call')
-        self.setWindowIcon(QtGui.QIcon('more\\image.jpg'))
-
-        self.ui.label.setText('Введите характеристики')
-        self.ui.label.setFont(QtGui.QFont('SansSerif', 13))
-        self.ui.label.setGeometry(QtCore.QRect(10, 10, 200, 25))
-
         self.ui.name.setMaxLength(100)
         self.ui.hour.setMaxLength(2)
         self.ui.minutes.setMaxLength(2)
-
-        self.ui.name_label.setText('название')
-        self.ui.hour_label.setText('час')
-        self.ui.minutes_label.setText('минуты')
 
         self.ui.button_of_save.clicked.connect(self.save_and_close)
 
@@ -32,21 +21,21 @@ class WinOfWeek(QtWidgets.QMainWindow):
         days = ''
 
         if self.ui.monday.isChecked():
-            days += 'пн '
+            days += 'Mon '
         if self.ui.tuesday.isChecked():
-            days += 'вт '
+            days += 'Tue '
         if self.ui.wednesday.isChecked():
-            days += 'ср '
+            days += 'Wed '
         if self.ui.thursday.isChecked():
-            days += 'чт '
+            days += 'Thu '
         if self.ui.friday.isChecked():
-            days += 'пт '
+            days += 'Fri '
         if self.ui.saturday.isChecked():
-            days += 'сб '
+            days += 'Sat '
         if self.ui.sunday.isChecked():
-            days += 'вс'
+            days += 'Sun'
 
-        clear_days = days.strip()  # убирание пробелов в конце строки на случай если последний день не воскресенье
+        clear_days = days.strip()  # удаление пробелов в конце строки на случай если последний день не воскресенье
 
         query = f"""
                     UPDATE data SET
@@ -54,7 +43,7 @@ class WinOfWeek(QtWidgets.QMainWindow):
                         days = '{clear_days}',
                         hour = '{self.ui.hour.text()}',
                         minutes = '{self.ui.minutes.text()}'
-                    WHERE id = {help_file.active_id}
+                    WHERE id = {int(help_file.active_id)}
                 """
         help_file.database.update_data('data\\week.sqlite', query)
 
