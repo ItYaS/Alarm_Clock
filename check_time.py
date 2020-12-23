@@ -33,31 +33,33 @@ while True:
         date = data[2].split('.')  # потому что строка такая: DD.MM.YYYY
 
         if len(date) > 1:  # на случай если строка со значением 'undefined'(значение по умолчанию)
-            index = day_data.index(data)  # для того, что бы знать какой кортеж с датой активный
-
             if (int(date[2]) == now_year and int(date[1]) == now_month
                     and int(date[0]) == now_day and int(data[3]) == now_hour
                     and int(data[4]) == now_minute):
+                index = day_data.index(data)  # для того, что бы знать какой кортеж с датой активный
+
                 help_file.active_path = 'data\\day.sqlite'
-                help_file.active_id = index
+                help_file.active_id = index + 1
                 start_music_and_open_notice_win()
 
     for data in week_data:
         days = data[2]
 
         # замена значений на числа, которые можно проверить
-        days = days.replace('пн', '0')
-        days = days.replace('вт', '1')
-        days = days.replace('ср', '2')
-        days = days.replace('чт', '3')
-        days = days.replace('пт', '4')
-        days = days.replace('сб', '5')
-        days = days.replace('вс', '6')
+        days = days.replace('Mon', '1')
+        days = days.replace('Tue', '2')
+        days = days.replace('Wed', '3')
+        days = days.replace('Thu', '4')
+        days = days.replace('Fri', '5')
+        days = days.replace('Sat', '6')
+        days = days.replace('Sun', '7')
 
         int_days = days.split()
 
-        if int(week_day) in int_days:
-            if data[3] == now_hour and data[4] == now_minute:
+        if str(week_day) in int_days:
+            if int(data[3]) == now_hour and int(data[4]) == now_minute:
+                index = week_data.index(data)  # для того, что бы знать какой кортеж с датой активный
+
                 help_file.active_path = 'data\\week.sqlite'
-                help_file.active_id = data[0]
+                help_file.active_id = index + 1
                 start_music_and_open_notice_win()
