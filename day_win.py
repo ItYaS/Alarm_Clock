@@ -11,26 +11,12 @@ class WinOfDays(QtWidgets.QMainWindow):
         self.ui = Ui_MainWindow()
         self.ui.setupUi(self)
 
-        self.setWindowTitle('Window for one-time call')
-        self.setWindowIcon(QtGui.QIcon('more\\image.jpg'))
-
-        self.ui.label.setText('Введите характеристики')
-        self.ui.label.setFont(QtGui.QFont('SansSerif', 13))
-        self.ui.label.setGeometry(QtCore.QRect(10, 10, 200, 25))
-
         self.ui.name.setMaxLength(100)
         self.ui.year.setMaxLength(4)
         self.ui.month.setMaxLength(2)
         self.ui.day.setMaxLength(2)
         self.ui.hour.setMaxLength(2)
         self.ui.minutes.setMaxLength(2)
-
-        self.ui.name_label.setText('название будильника')
-        self.ui.year_label.setText('год')
-        self.ui.month_label.setText('месяц')
-        self.ui.day_label.setText('день')
-        self.ui.hour_label.setText('час')
-        self.ui.minutes_label.setText('минуты')
 
         self.ui.button_of_save.clicked.connect(self.save_and_close)
 
