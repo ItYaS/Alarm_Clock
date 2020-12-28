@@ -1,4 +1,4 @@
-from PyQt5 import QtWidgets, QtGui
+from PyQt5 import QtWidgets
 from GUI.main_window import Ui_MainWindow
 import help_file
 
