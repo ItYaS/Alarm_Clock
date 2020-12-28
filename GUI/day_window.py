@@ -89,7 +89,7 @@ class Ui_MainWindow(object):
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
         MainWindow.setWindowTitle(_translate("MainWindow", "Window for one-time call"))
-        MainWindow.setWindowIcon(QtGui.QIcon('more\\logo.png'))
+        MainWindow.setWindowIcon(QtGui.QIcon('more\\logo.jpg'))
 
         self.label.setText(_translate("MainWindow", "Enter characteristics"))
         self.label.setFont(QtGui.QFont('SansSerif', 13))

@@ -217,7 +217,7 @@ class Ui_MainWindow(object):
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
         MainWindow.setWindowTitle(_translate("MainWindow", "Alarm Clock"))
-        MainWindow.setWindowIcon(QtGui.QIcon('more\\logo.png'))
+        MainWindow.setWindowIcon(QtGui.QIcon('more\\logo.jpg'))
 
         self.name_one_time.setText(_translate("MainWindow", "\t\t Alarm clocks for one-time call"))
         self.name_every_time.setText(_translate("MainWindow", "\t\t Alarm clocks for weekly call"))

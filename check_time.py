@@ -8,7 +8,7 @@ import help_file
 
 def start_music_and_open_notice_win():
     pygame.init()
-    pygame.mixer.music.load('more\\sound_4_call.mp3')
+    pygame.mixer.music.load('more\\call_sound.mp3')
     pygame.mixer.music.play()
 
     app = QtWidgets.QApplication([])

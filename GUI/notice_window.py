@@ -41,7 +41,7 @@ class Ui_MainWindow(object):
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
         MainWindow.setWindowTitle(_translate("MainWindow", "Notice about call"))
-        MainWindow.setWindowIcon(QtGui.QIcon('more\\logo.png'))
+        MainWindow.setWindowIcon(QtGui.QIcon('more\\logo.jpg'))
 
         self.name.setText(_translate("MainWindow", ""))
         self.date.setText(_translate("MainWindow", ""))
