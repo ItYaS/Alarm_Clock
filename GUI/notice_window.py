@@ -19,10 +19,6 @@ class Ui_MainWindow(object):
         self.statusbar.setObjectName("statusbar")
         MainWindow.setStatusBar(self.statusbar)
 
-        self.deactivate_button = QtWidgets.QPushButton(self.centralwidget)
-        self.deactivate_button.setGeometry(QtCore.QRect(90, 200, 111, 51))
-        self.deactivate_button.setObjectName("deactivate_button")
-
         self.name = QtWidgets.QLabel(self.centralwidget)
         self.name.setGeometry(QtCore.QRect(75, 10, 221, 16))
         self.name.setObjectName("name")
@@ -35,12 +31,16 @@ class Ui_MainWindow(object):
         self.time.setGeometry(QtCore.QRect(40, 90, 271, 16))
         self.time.setObjectName("time")
 
+        self.deactivate_button = QtWidgets.QPushButton(self.centralwidget)
+        self.deactivate_button.setGeometry(QtCore.QRect(90, 200, 111, 51))
+        self.deactivate_button.setObjectName("deactivate_button")
+
         self.retranslateUi(MainWindow)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
 
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
-        MainWindow.setWindowTitle(_translate("MainWindow", "Notice about call"))
+        MainWindow.setWindowTitle(_translate("MainWindow", "Notice about time"))
         MainWindow.setWindowIcon(QtGui.QIcon('more\\logo.jpg'))
 
         self.name.setText(_translate("MainWindow", ""))

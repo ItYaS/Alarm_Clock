@@ -5,9 +5,9 @@ import help_file
 import main_win
 
 
-class WinOfWeek(QtWidgets.QMainWindow):
+class WeekWindow(QtWidgets.QMainWindow):
     def __init__(self):
-        super(WinOfWeek, self).__init__()
+        super(WeekWindow, self).__init__()
         self.ui = Ui_MainWindow()
         self.ui.setupUi(self)
 
@@ -44,7 +44,7 @@ class WinOfWeek(QtWidgets.QMainWindow):
         help_file.database.update_data('data\\week.sqlite', query)
 
         # закрытие окон и открытие обновленного main_win
-        help_file.main_class.close_main_win()
+        help_file.main_class.close_main_window()
+        help_file.main_class.close_week_window()
         importlib.reload(main_win)
-        help_file.main_class.open_main_win()
-        help_file.main_class.close_week_win()
+        help_file.main_class.open_main_window()

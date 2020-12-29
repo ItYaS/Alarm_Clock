@@ -3,9 +3,9 @@ from GUI.notice_window import Ui_MainWindow
 import help_file
 
 
-class WinOfNotice(QtWidgets.QMainWindow):
+class NoticeWindow(QtWidgets.QMainWindow):
     def __init__(self):
-        super(WinOfNotice, self).__init__()
+        super(NoticeWindow, self).__init__()
         self.ui = Ui_MainWindow()
         self.ui.setupUi(self)
 
@@ -16,10 +16,9 @@ class WinOfNotice(QtWidgets.QMainWindow):
         self.ui.date.setText(f'date: {active_data[2]}')
         self.ui.time.setText(f'time: {active_data[3]}:{active_data[4]}')
 
-        self.ui.deactivate_button.clicked.connect(self.close_win)
+        self.ui.deactivate_button.clicked.connect(self.close_window)
 
-    # функция закрытие окна
-    def close_win(self):
+    def close_window(self):
         query = f"""
                     UPDATE data SET
                         name = 'undefined',

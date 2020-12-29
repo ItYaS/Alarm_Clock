@@ -2,7 +2,6 @@ import sqlite3
 import main_win
 import day_win
 import week_win
-import notice_win
 
 
 active_id = None  # id данных, которые нужно изменить в другом окне
@@ -10,37 +9,29 @@ active_path = ''  # путь БД с которой надо работать в
 
 
 class MainClass:
-    def open_main_win(self):
-        self.MainWin = main_win.MainWin()
+    def open_main_window(self):
+        self.MainWin = main_win.MainWindow()
         self.MainWin.show()
 
-    def open_day_win(self):
-        self.DayWin = day_win.WinOfDays()
+    def open_day_window(self):
+        self.DayWin = day_win.DayWindow()
         self.DayWin.show()
 
-    def open_week_win(self):
-        self.WeekWin = week_win.WinOfWeek()
+    def open_week_window(self):
+        self.WeekWin = week_win.WeekWindow()
         self.WeekWin.show()
 
-    def open_notice_win(self):
-        self.NoticeWin = notice_win.WinOfNotice()
-        self.NoticeWin.show()
-
-    def close_main_win(self):
+    def close_main_window(self):
         self.MainWin.close()
 
-    def close_day_win(self):
+    def close_day_window(self):
         self.DayWin.close()
 
-    def close_week_win(self):
+    def close_week_window(self):
         self.WeekWin.close()
-
-    def close_notice_win(self):
-        self.NoticeWin.close()
 
 
 class DataBase:
-    # удаление и обновление БД
     def create_database(self):
         # удаление всех данных и таблиц
         del_query = 'DROP TABLE data'

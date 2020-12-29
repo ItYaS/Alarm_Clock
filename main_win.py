@@ -3,25 +3,25 @@ from GUI.main_window import Ui_MainWindow
 import help_file
 
 
-class MainWin(QtWidgets.QMainWindow):
+class MainWindow(QtWidgets.QMainWindow):
     def __init__(self):
-        super(MainWin, self).__init__()
+        super(MainWindow, self).__init__()
         self.ui = Ui_MainWindow()
         self.ui.setupUi(self)
 
-        self.update_screen()  # вывод значений
+        self.update_screen()
 
         # lambda для того чтобы функциям можно было передавать аргументы
 
-        self.ui.add0_0.clicked.connect(lambda: self.open_day_win('1'))
-        self.ui.add0_1.clicked.connect(lambda: self.open_day_win('2'))
-        self.ui.add0_2.clicked.connect(lambda: self.open_day_win('3'))
-        self.ui.add0_3.clicked.connect(lambda: self.open_day_win('4'))
+        self.ui.add0_0.clicked.connect(lambda: self.open_day_window('1'))
+        self.ui.add0_1.clicked.connect(lambda: self.open_day_window('2'))
+        self.ui.add0_2.clicked.connect(lambda: self.open_day_window('3'))
+        self.ui.add0_3.clicked.connect(lambda: self.open_day_window('4'))
 
-        self.ui.add1_0.clicked.connect(lambda: self.open_week_win('1'))
-        self.ui.add1_1.clicked.connect(lambda: self.open_week_win('2'))
-        self.ui.add1_2.clicked.connect(lambda: self.open_week_win('3'))
-        self.ui.add1_3.clicked.connect(lambda: self.open_week_win('4'))
+        self.ui.add1_0.clicked.connect(lambda: self.open_week_window('1'))
+        self.ui.add1_1.clicked.connect(lambda: self.open_week_window('2'))
+        self.ui.add1_2.clicked.connect(lambda: self.open_week_window('3'))
+        self.ui.add1_3.clicked.connect(lambda: self.open_week_window('4'))
 
         day_path = 'data\\day.sqlite'
         self.ui.delete0_0.clicked.connect(lambda: self.delete_data(day_path, '1'))
@@ -65,15 +65,15 @@ class MainWin(QtWidgets.QMainWindow):
         self.ui.date1_3.setText(week_data[3][2])
         self.ui.time1_3.setText('{}:{}'.format(week_data[3][3], week_data[3][4]))
 
-    def open_day_win(self, active_data):
+    def open_day_window(self, active_data):
         # использование аргумента для определения пути
         help_file.active_id = active_data
-        help_file.main_class.open_day_win()
+        help_file.main_class.open_day_window()
 
-    def open_week_win(self, active_id):
+    def open_week_window(self, active_id):
         # использование аргумента для определения id данных в БД
         help_file.active_id = active_id
-        help_file.main_class.open_week_win()
+        help_file.main_class.open_week_window()
 
     def delete_data(self, path, active_id):
         query = f"""

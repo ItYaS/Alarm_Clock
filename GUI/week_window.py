@@ -35,9 +35,7 @@ class Ui_MainWindow(object):
         self.minutes_label.setGeometry(QtCore.QRect(280, 166, 111, 20))
         self.minutes_label.setObjectName("minutes_label")
 
-        self.save_button = QtWidgets.QPushButton(self.centralwidget)
-        self.save_button.setGeometry(QtCore.QRect(470, 350, 75, 23))
-        self.save_button.setObjectName("save_button")
+        # ниже элементы для взаимодействия с пользователем
 
         self.name = QtWidgets.QLineEdit(self.centralwidget)
         self.name.setGeometry(QtCore.QRect(280, 90, 251, 20))
@@ -82,6 +80,10 @@ class Ui_MainWindow(object):
         self.sunday.setGeometry(QtCore.QRect(30, 260, 131, 17))
         self.sunday.setObjectName("sunday")
 
+        self.save_button = QtWidgets.QPushButton(self.centralwidget)
+        self.save_button.setGeometry(QtCore.QRect(470, 350, 75, 23))
+        self.save_button.setObjectName("save_button")
+
         self.retranslateUi(MainWindow)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
 
@@ -90,7 +92,7 @@ class Ui_MainWindow(object):
         MainWindow.setWindowTitle(_translate("MainWindow", "Window for weekly call"))
         MainWindow.setWindowIcon(QtGui.QIcon('more\\logo.jpg'))
 
-        self.label.setText(_translate("MainWindow", "Enter characteristics"))
+        self.label.setText(_translate("MainWindow", "Enter time"))
         self.label.setFont(QtGui.QFont('SansSerif', 13))
         self.label.setGeometry(QtCore.QRect(10, 10, 200, 25))
         self.name_label.setText(_translate("MainWindow", "name call"))

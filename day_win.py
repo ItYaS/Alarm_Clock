@@ -5,9 +5,9 @@ import help_file
 import main_win
 
 
-class WinOfDays(QtWidgets.QMainWindow):
+class DayWindow(QtWidgets.QMainWindow):
     def __init__(self):
-        super(WinOfDays, self).__init__()
+        super(DayWindow, self).__init__()
         self.ui = Ui_MainWindow()
         self.ui.setupUi(self)
 
@@ -25,7 +25,7 @@ class WinOfDays(QtWidgets.QMainWindow):
         help_file.database.update_data('data\\day.sqlite', query)
 
         # закрытие окон и открытие обновленного main_win
-        help_file.main_class.close_main_win()
+        help_file.main_class.close_main_window()
+        help_file.main_class.close_day_window()
         importlib.reload(main_win)
-        help_file.main_class.open_main_win()
-        help_file.main_class.close_day_win()
+        help_file.main_class.open_main_window()

@@ -6,14 +6,14 @@ import notice_win
 import help_file
 
 
-def start_music_and_open_notice_win():
+def start_music_and_open_notice_window():
     pygame.init()
     pygame.mixer.music.load('more\\call_sound.mp3')
     pygame.mixer.music.play()
 
     app = QtWidgets.QApplication([])
-    application = notice_win.WinOfNotice()
-    application.show()
+    notice = notice_win.NoticeWindow()
+    notice.show()
     sys.exit(app.exec())
 
 
@@ -40,7 +40,7 @@ while True:
 
                 help_file.active_path = 'data\\day.sqlite'
                 help_file.active_id = index + 1
-                start_music_and_open_notice_win()
+                start_music_and_open_notice_window()
 
     for data in week_data:
         days = data[2]
@@ -62,4 +62,4 @@ while True:
 
                 help_file.active_path = 'data\\week.sqlite'
                 help_file.active_id = index + 1
-                start_music_and_open_notice_win()
+                start_music_and_open_notice_window()
