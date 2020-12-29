@@ -1,6 +1,6 @@
 import importlib
 from PyQt5 import QtWidgets
-from GUI.week_window import Ui_MainWindow
+from GUI.week_window import Window
 import help_file
 import main_win
 
@@ -8,8 +8,8 @@ import main_win
 class WeekWindow(QtWidgets.QMainWindow):
     def __init__(self):
         super(WeekWindow, self).__init__()
-        self.ui = Ui_MainWindow()
-        self.ui.setupUi(self)
+        self.ui = Window()
+        self.ui.setup_ui(self)
 
         self.ui.save_button.clicked.connect(self.save_and_close)
 

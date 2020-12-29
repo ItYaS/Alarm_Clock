@@ -12,8 +12,8 @@ def start_music_and_open_notice_window():
     pygame.mixer.music.play()
 
     app = QtWidgets.QApplication([])
-    notice = notice_win.NoticeWindow()
-    notice.show()
+    window = notice_win.NoticeWindow()
+    window.show()
     sys.exit(app.exec())
 
 

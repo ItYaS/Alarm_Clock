@@ -1,13 +1,13 @@
 from PyQt5 import QtWidgets
-from GUI.main_window import Ui_MainWindow
+from GUI.main_window import Window
 import help_file
 
 
 class MainWindow(QtWidgets.QMainWindow):
     def __init__(self):
         super(MainWindow, self).__init__()
-        self.ui = Ui_MainWindow()
-        self.ui.setupUi(self)
+        self.ui = Window()
+        self.ui.setup_ui(self)
 
         self.update_screen()
 

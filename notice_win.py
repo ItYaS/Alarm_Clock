@@ -1,13 +1,13 @@
 from PyQt5 import QtWidgets
-from GUI.notice_window import Ui_MainWindow
+from GUI.notice_window import Window
 import help_file
 
 
 class NoticeWindow(QtWidgets.QMainWindow):
     def __init__(self):
         super(NoticeWindow, self).__init__()
-        self.ui = Ui_MainWindow()
-        self.ui.setupUi(self)
+        self.ui = Window()
+        self.ui.setup_ui(self)
 
         table_data = help_file.database.pull_data(help_file.active_path)
         active_data = table_data[help_file.active_id]
